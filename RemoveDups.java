@@ -15,8 +15,9 @@ public class RemoveDups {
 
 
 	private final boolean rootNode;
+	private TrieNode sibling = null;
 	private List<TrieNode> children = null;
-	private String domain = null;
+	private String domain = "";
 	private String username = null;
 
 	private TrieNode() {
@@ -29,11 +30,32 @@ public class RemoveDups {
 
 	}
 
-	private void addAddr(Stack domains, String username) {
+	private String getDomain() {
+
+	    return domain;
+	}
+
+	private void addAddr(TrieNode n, Stack domains, String username) {
+
+	    String domain = domains.peek();
+	    if (domain == null) {
+		n.setUsername(username);
+		domains.pop();
+		return;
+	    }
+
+	    if (n.getDomain().equals("")) {
+		n.setDomain(domain);
+		return;
+	    }
+
+	    if (n.getDomain().equals(domain)) {
+
+		
+
+	    }
 
 	    
-
-
 	}
 
     }
@@ -64,16 +86,16 @@ public class RemoveDups {
 		System.out.println(addr);
 
 		domains = new Stack<>();
-	    tok = new StringTokenizer(addr, "@");
-	    username = tok.nextToken();
-	    fqdn = tok.nextToken();
-	    tok = new StringTokenizer(fqdn, ".");
-	    while (tok.hasMoreTokens()) {
+		tok = new StringTokenizer(addr, "@");
+		username = tok.nextToken();
+		fqdn = tok.nextToken();
+		tok = new StringTokenizer(fqdn, ".");
+		while (tok.hasMoreTokens()) {
 
-		domains.push(tok.nextToken());
-	    }
+		    domains.push(tok.nextToken());
+		}
 
-
+		TrieNode.addAddr(head, domains, username);
 	    }
 	} catch (IOException ioe) {
 
