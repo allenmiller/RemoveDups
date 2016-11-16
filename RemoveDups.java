@@ -14,34 +14,24 @@ public class RemoveDups {
     private static class TrieNode {
 
 
-	private List<TrieNode> siblings = null;
+	private final boolean rootNode;
 	private List<TrieNode> children = null;
 	private String domain = null;
 	private String username = null;
 
 	private TrieNode() {
 
+	    rootNode=true;
+	    children = new LinkedList<>();
 	}
 
 	private TrieNode(TrieNode n, String addr) {
 
-	    String fqdn;
-	    String username;
-	    Stack<String> domains = new Stack<>();
-
-	    StringTokenizer tok = new StringTokenizer(addr, "@");
-	    username = tok.nextToken();
-	    this.username = username;
-	    fqdn = tok.nextToken();
-	    tok = new StringTokenizer(fqdn, ".");
-	    while (tok.hasMoreTokens()) {
-
-		domains.push(tok.nextToken());
-	    }
-
 	}
 
 	private void addAddr(Stack domains, String username) {
+
+	    
 
 
 	}
@@ -63,11 +53,27 @@ public class RemoveDups {
 
 	TrieNode head = new TrieNode();
 	
+	String fqdn;
+	String username;
+	Stack<String> domains;
+	StringTokenizer tok;
 	try {
 	    BufferedReader addrs = Files.newBufferedReader(Paths.get(args[0]));
 	    while ((addr = addrs.readLine()) != null) {
 
 		System.out.println(addr);
+
+		domains = new Stack<>();
+	    tok = new StringTokenizer(addr, "@");
+	    username = tok.nextToken();
+	    fqdn = tok.nextToken();
+	    tok = new StringTokenizer(fqdn, ".");
+	    while (tok.hasMoreTokens()) {
+
+		domains.push(tok.nextToken());
+	    }
+
+
 	    }
 	} catch (IOException ioe) {
 
