@@ -37,6 +37,22 @@ public class RemoveDups {
 
 	private void addAddr(TrieNode n, Stack domains, String username) {
 
+	    String domain = domains.pop();
+	    if (domain == null) {
+		n.setUsername(username);
+		return;
+	    }
+
+	    if (n.getDomain().equals("")) {
+		n.setDomain(domain);
+		
+	    if (n.getDomain().equals(domain)) 
+
+	    return domain;
+	}
+
+	private void addAddr(TrieNode n, Stack domains, String username) {
+
 	    String domain = domains.peek();
 	    if (domain == null) {
 		n.setUsername(username);
